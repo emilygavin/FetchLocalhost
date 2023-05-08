@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
    },
    MiddleSection: {
     width: '100%',
-    height: '15%',
+    height: '20%',
     justifyContent: 'center',
     alignItems: '5%',
     backgroundColor: "#2c365a",
@@ -254,11 +254,11 @@ const styles = StyleSheet.create({
     imagePicker: {
       alignItems: 'center',
       width: '100%',
-      height: '50%'
+      height: '70%'
     },
     imagePreview: {
       width: '100%',
-      height: '100%',
+      height: 470,
       justifyContent: 'center',
       alignItems: 'center',
       borderColor: '#ccc',

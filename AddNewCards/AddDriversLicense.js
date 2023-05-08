@@ -5,9 +5,10 @@ import styles from '../StyleSheet/StyleSheet';
 import femaleAvatar from "../assets/avatar/femaleAvatar.png";
 import maleAvatar from "../assets/avatar/maleAvatar.png";
 import RNPickerSelect from 'react-native-picker-select';
+import Toast from 'react-native-toast-message';
 
 const AddDriversLicense = ({ navigation, route }) => {
-    const { URL, id, data, cardData } = route.params;
+    const { URL, id, data, cardData, password } = route.params;
     const [name, setName] = useState('Emily Gavin');
     const [dateOfBirth, setDateOfBirth] = useState('05-04-2001');
     const [countryOfResidence, setCountryOfResidence] = useState('');
@@ -25,7 +26,7 @@ const AddDriversLicense = ({ navigation, route }) => {
       try {
         const res = await fetch(URL + `/api/v1/users/login?` + new URLSearchParams({
           email: data.email,
-          password: data.password
+          password: password
         }),
           {
             method: "GET",
@@ -42,7 +43,8 @@ const AddDriversLicense = ({ navigation, route }) => {
             URL: URL,
             id: id,
             data: updatedData,
-            cardData: updatedData.cards
+            cardData: updatedData.cards,
+            password: password
           });
         }
       } catch (err) {
@@ -79,8 +81,16 @@ const AddDriversLicense = ({ navigation, route }) => {
             }) // Need to use POST to send body
           }
         )
+        Toast.show({
+          type: 'success',
+          position: 'bottom',
+          text1: 'Drivers License added to account!',
+          visibilityTime: 3000,
+          autoHide: true,
+          bottomOffset: 50,
+        });
         const data = await res.json()
-        console.log(data)
+        // console.log(data)
         callAPIRefresh();
       } catch (err) {
         console.log(err)

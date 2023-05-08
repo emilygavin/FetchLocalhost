@@ -6,7 +6,7 @@ import femaleAvatar from "../assets/avatar/femaleAvatar.png";
 import maleAvatar from "../assets/avatar/maleAvatar.png";
 
 const MainScreen = ({ navigation, route }) => {
-  const { URL, id, data, cardData } = route.params;
+  const { URL, id, data, cardData, password } = route.params;
 
     const cardList = [
       {
@@ -68,7 +68,7 @@ const MainScreen = ({ navigation, route }) => {
                 URL: URL,
                 id: id,
                 data: data,
-                cardData: cardData
+                cardData: cardData,
               })} style={styles.button}>
                 <Text style={styles.mediumTextBold}>Open Card</Text>
               </Pressable>
@@ -96,7 +96,8 @@ const MainScreen = ({ navigation, route }) => {
           URL: URL,
           id: id,
           data: data,
-          cardData: cardData
+          cardData: cardData,
+          password: password
         })}>
             <Text style={[{ color: "white" }, { fontWeight: "bold" }]}>+</Text>
           </Pressable>

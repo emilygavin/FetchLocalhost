@@ -1,6 +1,5 @@
 import { Text, View, ImageBackground, Pressable, Image } from 'react-native'
 import { Title ,Paragraph } from 'react-native-paper';
-import GardaBadgeLogo from "../assets/cardLogos/GardaBadgeLogo.png";
 import styles from '../StyleSheet/StyleSheet';
 import React, { useState, useEffect } from 'react';
 import { Accelerometer } from 'expo-sensors';
@@ -9,13 +8,13 @@ import CardBackground from "../assets/bgs/bg_transparent.png";
 const AgeCard = ({ navigation, route }) => {
   const { URL, id, data, cardData } = route.params;
   const [dataAcc, setDataAcc] = useState({});
-  const [rectangleColor, setRectangleColor] = useState('#FF0000');
+  const [color, setColor] = useState('#FF0000');
 
   useEffect(() => {
     Accelerometer.setUpdateInterval(500);
     const subscription = Accelerometer.addListener(accelerometerData => {
       setDataAcc(accelerometerData);
-      changeRectangleColor(accelerometerData);
+      changeColor(accelerometerData);
     });
 
     return () => {
@@ -23,7 +22,7 @@ const AgeCard = ({ navigation, route }) => {
     };
   }, []);
 
-  const changeRectangleColor = ({ x, y, z }) => {
+  const changeColor = ({ x, y, z }) => {
     const rainbowColors = [
       '#FF0000', // Red
       '#FF7F00', // Orange
@@ -35,7 +34,7 @@ const AgeCard = ({ navigation, route }) => {
     ];
 
     const index = Math.floor(Math.abs(x + y + z) * 10) % rainbowColors.length;
-    setRectangleColor(rainbowColors[index]);
+    setColor(rainbowColors[index]);
   };
   
   return (
@@ -67,7 +66,7 @@ const AgeCard = ({ navigation, route }) => {
           <Paragraph style={styles.paragraph}>
             <Text style={{ fontWeight: 'bold' }}>Age Card No:</Text> {cardData.ageCard.cardNumber}
           </Paragraph>
-          <View style={{ backgroundColor: rectangleColor, width: '100%', height: 20, marginBottom: 20, borderRadius: 20 }} />
+          <View style={{ backgroundColor: color, width: '100%', height: 20, marginBottom: 20, borderRadius: 20 }} />
           <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
             <Pressable onPress={() => navigation.goBack()} style={styles.button}>
               <Text style={styles.mediumTextBold}>Go Back</Text>

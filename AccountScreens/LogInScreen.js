@@ -5,7 +5,7 @@ import MainBackground from "../assets/bgs/bg.png";
 import styles from '../StyleSheet/StyleSheet';
 
 const LogInScreen = ({ navigation }) => {
-    const URL = `https://aad8-2001-bb6-66ab-3000-45a5-4851-b478-1701.ngrok-free.app`
+    const URL = `http://34.242.152.180`
     let id = "";
     let data = "";
     let cardData = "";
@@ -35,7 +35,7 @@ const LogInScreen = ({ navigation }) => {
           data = await res.json();
           cardData = data.cards;
           id = data.id;
-          console.log(data);
+          // console.log(data);
           console.log(email);
           console.log(password);
           console.log(cardData);
@@ -45,7 +45,8 @@ const LogInScreen = ({ navigation }) => {
             URL: URL,
             id: id,
             data: data,
-            cardData: cardData
+            cardData: cardData,
+            password: password
           });
           JSON.parse(cardData);
         } else {

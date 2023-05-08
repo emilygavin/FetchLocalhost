@@ -15,11 +15,14 @@ import AgeCard from './DisplayCards/AgeCard';
 import StudentCard from './DisplayCards/StudentCard';
 import DriversLicense from './DisplayCards/DriversLicense';
 import PassportCard from './DisplayCards/PassportCard';
+import Toast from 'react-native-toast-message';
+import CameraScreen from './MainScreens/cameraScreen';
 
 const Stack = createNativeStackNavigator()
 
 export default App = () => {
   return ( 
+    <>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
@@ -100,7 +103,14 @@ export default App = () => {
           name="Passport Card"
           component={PassportCard}
         />
+        <Stack.Screen
+            options={{ headerShown: false }}
+            name="Camera Screen"
+            component={CameraScreen}
+          />
       </Stack.Navigator>
     </NavigationContainer>
+    <Toast ref={(ref) => Toast.setRef(ref)} />
+    </>
   )
 }

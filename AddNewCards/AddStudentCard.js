@@ -3,9 +3,10 @@ import { useState } from 'react'
 import MainBackground from "../assets/bgs/bg.png";
 import styles from '../StyleSheet/StyleSheet';
 import RNPickerSelect from 'react-native-picker-select';
+import Toast from 'react-native-toast-message';
 
 const AddStudentCard = ({ navigation, route }) => {
-    const { URL, id, data, cardData } = route.params;
+    const { URL, id, data, cardData, password } = route.params;
     const [text, setText] = useState('. . . waiting for fetch API')
     const [name, setName] = useState('Emily Gavin');
     const [dateOfBirth, setDateOfBirth] = useState('05-04-2001'); 
@@ -18,7 +19,7 @@ const AddStudentCard = ({ navigation, route }) => {
       try {
         const res = await fetch(URL + `/api/v1/users/login?` + new URLSearchParams({
           email: data.email,
-          password: data.password
+          password: password
         }),
           {
             method: "GET",
@@ -35,7 +36,8 @@ const AddStudentCard = ({ navigation, route }) => {
             URL: URL,
             id: id,
             data: updatedData,
-            cardData: updatedData.cards
+            cardData: updatedData.cards,
+            password: password
           });
         }
       } catch (err) {
@@ -64,8 +66,16 @@ const AddStudentCard = ({ navigation, route }) => {
             }) // Need to use POST to send body
           }
         )
+        Toast.show({
+          type: 'success',
+          position: 'bottom',
+          text1: 'Student Card added to account!',
+          visibilityTime: 3000,
+          autoHide: true,
+          bottomOffset: 50,
+        });
         const data = await res.json()
-        console.log(data)
+        // console.log(data)
         setText(JSON.stringify(data))
         callAPIRefresh();
       } catch (err) {
