@@ -17,11 +17,11 @@ const AgeCard = ({ navigation, route }) => {
       changeColor(accelerometerData);
     });
 
-    return () => {
+    return () => { 
       subscription && subscription.remove();
     };
   }, []);
-
+ 
   const changeColor = ({ x, y, z }) => {
     const rainbowColors = [
       '#FF0000', // Red
